@@ -40,83 +40,51 @@ export const navItems = [
   { href: "#xiangan", label: "结缘" },
 ] as const;
 
-/** 侧廊 · 工序龛（正殿放成片，这里放怎么做；步骤数按门类实际，不强行对齐） */
+/** 侧廊 · 工序龛（文案从简：一句说明 + 旁白 + 工序名） */
 export const services = [
   {
     id: "painting",
     title: "彩绘",
-    summary:
-      "殿宇梁枋、斗拱、天花与檐下纹饰。官式纹样与矿物色阶，金碧只点在该亮的地方。",
+    summary: "梁枋、斗拱、天花与檐下纹饰。",
     image: "/images/demo/craft-painting.jpg",
-    /** 原图像素，用于布局与防裁切 */
     imageWidth: 1024,
     imageHeight: 687,
-    /** split：图文并排；stack：图上全文下（更宽拼图） */
     layout: "split" as const,
-    lead: "梁枋彩画不是四步填空。地仗与起谱做不好，后面的金碧都是虚的。",
     voice: "地仗不稳，金碧再满也是虚的。",
-    steps: [
-      { name: "地仗", note: "清理旧皮、补裂找平，灰皮层次做扎实，才有可画的底。" },
-      { name: "分中起谱", note: "按梁枋分位起谱，纹样对仗与枋心格局先定死。" },
-      { name: "沥粉", note: "粉线起筋，为贴金与退晕留出起伏。" },
-      { name: "贴金", note: "额枋、斗拱等关键部位贴金，宜克制，殿内才沉。" },
-      { name: "涂色渲染", note: "刷色、攒色、退晕分层做，统一色温，避免跳色。" },
-    ],
+    steps: ["地仗", "分中起谱", "沥粉", "贴金", "涂色渲染"],
   },
   {
     id: "mural",
     title: "壁画",
-    summary:
-      "殿壁、廊壁上的人物故事与大幅画面。壁面先稳，构图先定，再谈设色与贴金。",
+    summary: "殿壁、廊壁上的人物故事与大幅画面。",
     image: "/images/demo/craft-mural.jpg",
     imageWidth: 1024,
     imageHeight: 572,
     layout: "stack" as const,
-    lead: "壁画先是一幅「墙」，再是一幅「画」——构图先定，颜色才跟得上。",
-    voice: "壁画怕的是花、是乱。远看要成章，近看要经得起端详。",
-    steps: [
-      { name: "起稿分格", note: "按壁面尺度分格落稿，先定人物、故事与主次。" },
-      { name: "落墨", note: "勾勒形体与衣纹，把动势和结构关系稳住。" },
-      { name: "设色", note: "大面铺色后再罩染，整壁色温一起看，不局部炫技。" },
-      { name: "沥粉贴金", note: "冠饰、法器等视题材加点；没有需要就不硬做。" },
-    ],
+    voice: "远看要成章，近看要经得起端详。",
+    steps: ["起稿分格", "落墨", "设色", "沥粉贴金"],
   },
   {
     id: "sculpture",
     title: "塑像",
-    summary:
-      "泥塑、木胎与妆銮塑像。骨架与泥胎分层到位，开脸装金才站得住。",
+    summary: "泥塑、木胎与妆銮，开脸装金。",
     image: "/images/demo/craft-sculpture.jpg",
     imageWidth: 1024,
     imageHeight: 572,
     layout: "stack" as const,
-    lead: "塑像是「立得住」再「看得见」：骨、泥、脸，一步省不了。",
     voice: "眉眼定了，整殿的气就定了。",
-    steps: [
-      { name: "扎骨架", note: "立骨定势，身量、坐立与重心先找准。" },
-      { name: "上粗泥", note: "粗泥定大形，体积和衣纹走向先出来。" },
-      { name: "上细泥", note: "细泥收面压光，细节留给妆銮，不一次堆死。" },
-      { name: "妆銮开脸", note: "着色与开脸反复看光；冠饰着金视题材需要。" },
-    ],
+    steps: ["扎骨架", "上粗泥", "上细泥", "妆銮开脸"],
   },
   {
     id: "restoration",
     title: "修缮补绘",
-    summary:
-      "风化剥落、局部残损的彩绘与壁画谨慎修复。先问该不该动，再问怎么补。",
+    summary: "能留则留，必补才补。",
     image: "/images/demo/craft-restoration.jpg",
     imageWidth: 1024,
     imageHeight: 572,
     layout: "stack" as const,
-    lead: "修缮不是缩短版的新作。步骤跟着病害走，能少动就少动。",
-    voice: "修缮不是重画一张新画，重新塑一尊像。哪里动、哪里不动，要比新做更谨慎。",
-    steps: [
-      { name: "勘察测绘", note: "看形制、病害与残色，先记录再开口。" },
-      { name: "定去留", note: "可留层不动，必补处才补。" },
-      { name: "清理加固", note: "清除不稳固层，空鼓、粉化处先加固。" },
-      { name: "补绘接茬", note: "按残色取样补缺，接茬求隐，不求满堂一新。" },
-      { name: "防护统一", note: "必要处做防护；新旧交界压到同一气里。" },
-    ],
+    voice: "哪里动、哪里不动，要比新做更谨慎。",
+    steps: ["勘察", "定去留", "清理加固", "补绘", "防护"],
   },
 ] as const;
 

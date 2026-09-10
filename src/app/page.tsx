@@ -6,7 +6,7 @@ import { GateProgress } from "@/components/temple/GateProgress";
 import { HallCase } from "@/components/temple/HallCase";
 import { HostWelcome } from "@/components/temple/HostWelcome";
 import { IncenseSpine } from "@/components/temple/IncenseSpine";
-import { LanternField, LanternNiche } from "@/components/temple/LanternField";
+import { LanternField } from "@/components/temple/LanternField";
 import { Threshold } from "@/components/temple/Threshold";
 import { getFeaturedCases } from "@/content/cases";
 import { processSteps, services, site } from "@/content/site";
@@ -98,49 +98,31 @@ export default function HomePage() {
       <section id="celang" className="relative scroll-mt-[var(--header-h)]">
         <LanternField>
           <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-            <div className="mb-16 text-center sm:mb-24">
+            <div className="mb-14 text-center sm:mb-20">
               <p className="text-sm tracking-[0.25em] text-paper/40">
                 工序在廊 · 成片在殿
               </p>
-              <p className="mx-auto mt-4 max-w-lg break-keep text-base leading-relaxed text-paper/45">
-                这里不摆落成堂景，只把怎么做的路走一遍——主理人领路，
-                <span className="whitespace-nowrap">一龛一道工序</span>。
+              <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-paper/45">
+                不摆落成堂景，只放工艺流程。
               </p>
             </div>
 
-            <div className="space-y-28 sm:space-y-36">
+            <div className="space-y-20 sm:space-y-28">
               {services.map((service, i) => (
                 <CraftNiche key={service.id} service={service} index={i} />
               ))}
             </div>
 
-            {/* 合作流程收在工艺区 */}
-            <LanternNiche className="mt-24 sm:mt-32">
-              <div className="border-t border-paper/10 pt-14 sm:pt-16">
-                <p className="text-sm tracking-[0.2em] text-oldgold">
-                  合作怎么走
-                </p>
-                <h3 className="font-display mt-3 text-xl sm:text-2xl">
-                  勘察到验收，四个节点
-                </h3>
-                <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-                  {processSteps.map((step) => (
-                    <li
-                      key={step.step}
-                      className="border-t border-oldgold/35 pt-4"
-                    >
-                      <p className="font-display text-base text-oldgold">
-                        {step.step}
-                      </p>
-                      <p className="mt-2 text-base text-paper">{step.title}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-paper/40">
-                        {step.desc}
-                      </p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </LanternNiche>
+            <p className="mt-16 text-center text-sm leading-relaxed text-paper/40 sm:mt-20">
+              往下进殿看落成，或
+              <a
+                href="#xiangan"
+                className="mx-1 text-oldgold/80 underline-offset-4 hover:text-oldgold hover:underline"
+              >
+                去结缘谈承接
+              </a>
+              。
+            </p>
           </div>
         </LanternField>
       </section>
@@ -159,8 +141,8 @@ export default function HomePage() {
                 抬头看梁，一次一座
               </h2>
             </div>
-            <p className="hidden max-w-[14rem] text-right text-xs leading-relaxed text-paper/35 sm:block">
-              图在框内，字在一侧——留出殿内该有的空隙。
+            <p className="hidden max-w-[14rem] text-right text-sm leading-relaxed text-paper/40 sm:block">
+              一次只看一座，细处留给驻足。
             </p>
           </div>
         </div>
@@ -176,14 +158,14 @@ export default function HomePage() {
             href="#xiangan"
             className="text-xs tracking-[0.3em] text-paper/40 hover:text-oldgold"
           >
-            有相似工程？去香案留下 →
+            有相似工程？去结缘留下 →
           </a>
         </div>
       </section>
 
-      <Threshold seal="香" title="香案" hint="话说完了，可以留下" />
+      <Threshold seal="缘" title="结缘" hint="话说完了，可以留下" />
 
-      {/* 香案 · 联系 */}
+      {/* 结缘 · 合作与联系 */}
       <section
         id="xiangan"
         className="relative scroll-mt-[var(--header-h)] bg-hall pb-6 sm:pb-10"
@@ -196,38 +178,60 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative mx-auto grid max-w-5xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-12 lg:gap-14 lg:px-8">
-          <div className="lg:col-span-5">
-            <div className="mx-auto h-px w-16 bg-oldgold/40 lg:mx-0" />
-            <div className="mx-auto mt-0 h-12 w-px bg-gradient-to-b from-oldgold/40 to-transparent lg:mx-0" />
+        <div className="relative mx-auto max-w-5xl px-4 pt-20 sm:px-6 sm:pt-28 lg:px-8">
+          <div className="mx-auto h-px w-16 bg-oldgold/40" />
+          <div className="mx-auto mt-0 h-12 w-px bg-gradient-to-b from-oldgold/40 to-transparent" />
 
-            <p className="mt-2 text-sm tracking-[0.3em] text-oldgold">
-              香案
-            </p>
-            <h2 className="font-display mt-4 text-[clamp(1.75rem,5vw,2.75rem)] leading-snug">
-              工程说到这里
-            </h2>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-paper/45">
-              微信优先。类型、地点、大致工期——三句话够我们判断能否承接。
-            </p>
+          <p className="mt-2 text-center text-sm tracking-[0.3em] text-oldgold">
+            结缘
+          </p>
+          <h2 className="font-display mt-4 text-center text-[clamp(1.75rem,5vw,2.75rem)] leading-snug">
+            工程说到这里
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-paper/45">
+            微信优先。类型、地点、大致工期——三句话够我们判断能否承接。
+          </p>
 
-            <div className="mt-8 border border-oldgold/20 bg-hall-deep/60 px-5 py-6">
-              <p className="text-sm tracking-[0.2em] text-paper/45">微信</p>
-              <p className="font-display mt-2 text-2xl text-oldgold sm:text-3xl">
-                {site.wechat}
-              </p>
-              <a
-                href={`tel:${site.phone.replace(/-/g, "")}`}
-                className="mt-3 block text-sm text-paper/50 hover:text-paper"
-              >
-                {site.phone}
-              </a>
-            </div>
+          <div className="mt-14 border-t border-paper/10 pt-12">
+            <p className="text-sm tracking-[0.2em] text-oldgold">合作怎么走</p>
+            <h3 className="font-display mt-3 text-xl sm:text-2xl">
+              勘察到验收，四个节点
+            </h3>
+            <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+              {processSteps.map((step) => (
+                <li key={step.step} className="border-t border-oldgold/35 pt-4">
+                  <p className="font-display text-base text-oldgold">
+                    {step.step}
+                  </p>
+                  <p className="mt-2 text-base text-paper">{step.title}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-paper/40">
+                    {step.desc}
+                  </p>
+                </li>
+              ))}
+            </ol>
           </div>
 
-          <div className="lg:col-span-7">
-            <h3 className="font-display mb-6 text-xl">留下工程需求</h3>
-            <ContactForm />
+          <div className="mt-16 grid gap-12 border-t border-paper/10 pb-6 pt-12 sm:pb-10 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-5">
+              <div className="border border-oldgold/20 bg-hall-deep/60 px-5 py-6">
+                <p className="text-sm tracking-[0.2em] text-paper/45">微信</p>
+                <p className="font-display mt-2 text-2xl text-oldgold sm:text-3xl">
+                  {site.wechat}
+                </p>
+                <a
+                  href={`tel:${site.phone.replace(/-/g, "")}`}
+                  className="mt-3 block text-sm text-paper/50 hover:text-paper"
+                >
+                  {site.phone}
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <h3 className="font-display mb-6 text-xl">留下工程需求</h3>
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>

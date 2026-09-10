@@ -257,15 +257,8 @@ export function HallCase({ item, index }: { item: CaseStudy; index: number }) {
             flip ? "lg:order-1 lg:pr-2 lg:text-right" : "lg:order-2 lg:pl-2"
           }`}
         >
-          <p
-            className={`text-sm tracking-[0.2em] text-oldgold transition-all delay-100 duration-700 sm:text-base ${
-              lit ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-            }`}
-          >
-            {String(index + 1).padStart(2, "0")} · {item.category}
-          </p>
           <h3
-            className={`font-display mt-3 text-[clamp(1.35rem,3.5vw,2rem)] leading-snug text-paper transition-all delay-150 duration-700 ${
+            className={`font-display text-[clamp(1.35rem,3.5vw,2rem)] leading-snug text-paper transition-all delay-100 duration-700 ${
               lit ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
             }`}
           >

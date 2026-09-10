@@ -28,85 +28,38 @@ function CraftImage({
           priority={priority}
         />
       </div>
-      <figcaption className="mt-2 text-xs tracking-[0.2em] text-paper/35">
-        {service.title} · 工序示意
-      </figcaption>
     </figure>
   );
 }
 
-function CraftIntro({ service }: { service: CraftService }) {
+function CraftCopy({ service }: { service: CraftService }) {
   return (
     <div>
-      <p className="font-display text-4xl text-paper/10 sm:text-5xl">
-        {service.title.slice(0, 1)}
+      <h3 className="font-display text-2xl sm:text-3xl">{service.title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-paper/50 sm:text-base">
+        {service.summary}
       </p>
-      <h3 className="font-display -mt-3 text-2xl sm:text-3xl">{service.title}</h3>
-      <p className="mt-4 text-sm leading-relaxed text-paper/55 sm:text-base">
-        {service.lead}
-      </p>
-      <p className="mt-3 text-sm leading-relaxed text-paper/35">{service.summary}</p>
-
-      <blockquote className="mt-6 border-l border-oldgold/30 pl-4">
-        <p className="text-sm tracking-[0.2em] text-oldgold/90">
-          {host.title} · 旁白
+      <blockquote className="mt-7 border-l border-oldgold/35 pl-4">
+        <p className="text-sm tracking-[0.22em] text-oldgold sm:text-base">
+          {host.title}
+          <span className="mx-2 text-oldgold/40" aria-hidden>
+            ·
+          </span>
+          旁白
         </p>
-        <p className="mt-2 font-display text-[0.95rem] leading-relaxed text-paper/70 sm:text-base">
+        <p className="mt-3 font-display text-sm leading-relaxed text-paper/70 sm:text-base">
           「{service.voice}」
         </p>
       </blockquote>
-    </div>
-  );
-}
-
-function CraftSteps({
-  service,
-  columns,
-}: {
-  service: CraftService;
-  columns: 2 | 3 | 5;
-}) {
-  const colClass =
-    columns === 5
-      ? "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-      : columns === 3
-        ? "sm:grid-cols-2 lg:grid-cols-3"
-        : "sm:grid-cols-2";
-
-  return (
-    <div>
-      <p className="text-sm tracking-[0.2em] text-oldgold">
-        主要工序 · 视现场增减
+      <p className="mt-6 text-sm leading-relaxed tracking-wide text-paper/45">
+        {service.steps.join(" · ")}
       </p>
-      <ol className={`mt-4 grid gap-4 ${colClass}`}>
-        {service.steps.map((step, stepIndex) => (
-          <li key={step.name} className="border-t border-oldgold/25 pt-3">
-            <p className="flex items-baseline gap-2 text-sm tracking-[0.15em] text-oldgold">
-              <span className="font-display text-base">
-                {String(stepIndex + 1).padStart(2, "0")}
-              </span>
-              <span className="text-paper/90">{step.name}</span>
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-paper/40">
-              {step.note}
-            </p>
-          </li>
-        ))}
-      </ol>
     </div>
   );
-}
-
-function stepColumns(count: number): 2 | 3 | 5 {
-  if (count >= 5) return 5;
-  if (count === 3) return 3;
-  return 2;
 }
 
 /**
- * 文案为主、配图收束：
- * - split：文左图右（图约四成宽）
- * - stack：先文案，再中等宽度配图，工序在下
+ * 文案从简：标题、一句说明、旁白、工序名串。
  */
 export function CraftNiche({
   service,
@@ -115,22 +68,21 @@ export function CraftNiche({
   service: CraftService;
   index: number;
 }) {
-  const cols = stepColumns(service.steps.length);
   const split = service.layout === "split";
 
   if (split) {
     return (
       <LanternNiche>
-        <article className="grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="flex flex-col gap-8 lg:col-span-7">
-            <CraftIntro service={service} />
-            <CraftSteps service={service} columns={2} />
+        <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <CraftCopy service={service} />
           </div>
-          <div className="lg:col-span-5 lg:pt-2">
+          <div className="lg:col-span-7">
             <CraftImage
               service={service}
               priority={index === 0}
-              sizes="(max-width: 1024px) 92vw, 28vw"
+              sizes="(max-width: 1024px) 92vw, 42vw"
+              className="w-full max-w-xl lg:max-w-none"
             />
           </div>
         </article>
@@ -140,21 +92,18 @@ export function CraftNiche({
 
   return (
     <LanternNiche>
-      <article className="relative space-y-7">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
-            <CraftIntro service={service} />
-          </div>
-          <div className="lg:col-span-7 lg:flex lg:justify-end lg:pt-1">
-            <CraftImage
-              service={service}
-              priority={index === 0}
-              sizes="(max-width: 1024px) 92vw, 36vw"
-              className="w-full max-w-md sm:max-w-lg lg:max-w-[28rem]"
-            />
-          </div>
+      <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          <CraftCopy service={service} />
         </div>
-        <CraftSteps service={service} columns={cols} />
+        <div className="lg:col-span-7 lg:flex lg:justify-end">
+          <CraftImage
+            service={service}
+            priority={index === 0}
+            sizes="(max-width: 1024px) 92vw, 36vw"
+            className="w-full max-w-md sm:max-w-lg lg:max-w-[28rem]"
+          />
+        </div>
       </article>
     </LanternNiche>
   );

@@ -7,7 +7,7 @@ const gates = [
   { id: "zhuchi", label: "迎客", seal: "迎" },
   { id: "celang", label: "侧廊", seal: "廊" },
   { id: "zhengdian", label: "正殿", seal: "殿" },
-  { id: "xiangan", label: "香案", seal: "香" },
+  { id: "xiangan", label: "结缘", seal: "缘" },
 ] as const;
 
 type GateId = (typeof gates)[number]["id"];
