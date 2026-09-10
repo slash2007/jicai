@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a3530"/>
+      <stop offset="55%" stop-color="#2C2A26"/>
+      <stop offset="100%" stop-color="#1a1814"/>
+    </linearGradient>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#A68B4B" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#g)"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <rect x="8%" y="18%" width="84%" height="64%" fill="none" stroke="#A68B4B" stroke-opacity="0.35" stroke-width="2"/>
+  <path d="M 192 720 Q 800 450 1408 680" fill="none" stroke="#8B2E2E" stroke-opacity="0.45" stroke-width="3"/>
+  <circle cx="1248" cy="280" r="36" fill="none" stroke="#3D5A5B" stroke-opacity="0.5" stroke-width="2"/>
+  <text x="8%" y="86%" fill="#E8E2D6" fill-opacity="0.9" font-family="serif" font-size="42">大雄宝殿彩绘</text>
+  <text x="8%" y="92%" fill="#E8E2D6" fill-opacity="0.55" font-family="sans-serif" font-size="24">案例封面占位</text>
+</svg>

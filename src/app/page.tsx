@@ -1,69 +1,229 @@
 import Image from "next/image";
+import { ContactForm } from "@/components/ContactForm";
+import { BeamPerspective } from "@/components/temple/BeamPerspective";
+import { CraftNiche } from "@/components/temple/CraftNiche";
+import { GateProgress } from "@/components/temple/GateProgress";
+import { HallCase } from "@/components/temple/HallCase";
+import { HostWelcome } from "@/components/temple/HostWelcome";
+import { IncenseSpine } from "@/components/temple/IncenseSpine";
+import { LanternField, LanternNiche } from "@/components/temple/LanternField";
+import { Threshold } from "@/components/temple/Threshold";
+import { getFeaturedCases } from "@/content/cases";
+import { processSteps, services, site } from "@/content/site";
 
-export default function Home() {
+export default function HomePage() {
+  const featured = getFeaturedCases();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="bg-hall text-paper">
+      <IncenseSpine />
+      <GateProgress />
+
+      {/* 山门 */}
+      <section
+        id="shanmen"
+        className="relative flex min-h-[100svh] items-stretch overflow-hidden grain"
+      >
+        <div className="absolute inset-0 bg-hall">
+          <Image
+            src="/images/demo/sculpture-2.jpg"
+            alt=""
+            fill
+            priority
+            className="animate-kenburns object-cover opacity-55"
+            sizes="100vw"
+          />
+          <BeamPerspective />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 30%, rgba(166,139,75,0.1), transparent 38%), linear-gradient(to top, #0e0d0b 10%, transparent 42%), linear-gradient(to bottom, #0e0d0b 0%, transparent 30%), linear-gradient(to right, #0e0d0b 0%, transparent 35%)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-end gap-10 px-4 pb-24 pt-[calc(var(--header-h)+2rem)] sm:px-6 sm:pb-28 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:px-8 lg:pb-20">
+          <div className="order-2 max-w-sm lg:order-1 lg:justify-self-start">
+            <p className="text-sm tracking-[0.25em] text-oldgold/90 sm:text-base">
+              进殿不必赶路
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-paper/50 sm:text-base">
+              {site.tagline}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-paper/35">
+              过山门，先见主理人；再随他入廊看工艺、进殿看工程、到香案谈承接。
+            </p>
+            <a
+              href="#zhuchi"
+              className="mt-10 inline-flex items-center gap-3 text-xs tracking-[0.3em] text-paper/50 transition-colors hover:text-oldgold"
+            >
+              <span className="flex h-10 w-10 items-center justify-center border border-paper/15">
+                ↓
+              </span>
+              见主理人
+            </a>
+          </div>
+
+          <div className="order-1 flex justify-center lg:order-2">
+            <div className="relative border border-oldgold/25 bg-hall-deep/40 px-5 py-10 backdrop-blur-[2px] sm:px-6 sm:py-14">
+              <div className="absolute inset-x-3 top-3 h-px bg-oldgold/20" />
+              <div className="absolute inset-x-3 bottom-3 h-px bg-oldgold/20" />
+              <h1 className="font-display writing-vertical mx-auto text-[clamp(2.75rem,8vw,4.5rem)] leading-[1.35] tracking-[0.35em] text-paper">
+                {site.name}
+              </h1>
+              <p className="mt-8 text-center text-sm tracking-[0.3em] text-oldgold/80">
+                门
+              </p>
+            </div>
+          </div>
+
+          <div className="order-3 hidden lg:block" aria-hidden />
+        </div>
+      </section>
+
+      {/* 迎客 · 主理人（门与廊之间） */}
+      <HostWelcome />
+
+      <Threshold seal="廊" title="侧廊" hint="一龛一盏，工序次第" />
+
+      {/* 侧廊 · 工序 + 主理人旁白 */}
+      <section id="celang" className="relative scroll-mt-[var(--header-h)]">
+        <LanternField>
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+            <div className="mb-16 text-center sm:mb-24">
+              <p className="text-sm tracking-[0.25em] text-paper/40">
+                工序在廊 · 成片在殿
+              </p>
+              <p className="mx-auto mt-4 max-w-lg break-keep text-base leading-relaxed text-paper/45">
+                这里不摆落成堂景，只把怎么做的路走一遍——主理人领路，
+                <span className="whitespace-nowrap">一龛一道工序</span>。
+              </p>
+            </div>
+
+            <div className="space-y-28 sm:space-y-36">
+              {services.map((service, i) => (
+                <CraftNiche key={service.id} service={service} index={i} />
+              ))}
+            </div>
+
+            {/* 合作流程收在工艺区 */}
+            <LanternNiche className="mt-24 sm:mt-32">
+              <div className="border-t border-paper/10 pt-14 sm:pt-16">
+                <p className="text-sm tracking-[0.2em] text-oldgold">
+                  合作怎么走
+                </p>
+                <h3 className="font-display mt-3 text-xl sm:text-2xl">
+                  勘察到验收，四个节点
+                </h3>
+                <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+                  {processSteps.map((step) => (
+                    <li
+                      key={step.step}
+                      className="border-t border-oldgold/35 pt-4"
+                    >
+                      <p className="font-display text-base text-oldgold">
+                        {step.step}
+                      </p>
+                      <p className="mt-2 text-base text-paper">{step.title}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-paper/40">
+                        {step.desc}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </LanternNiche>
+          </div>
+        </LanternField>
+      </section>
+
+      <Threshold seal="殿" title="正殿" hint="一次只望一座殿" />
+
+      {/* 正殿 · 作品 */}
+      <section id="zhengdian" className="relative scroll-mt-[var(--header-h)] overflow-hidden">
+        <div className="mx-auto max-w-5xl px-4 pb-4 pt-10 sm:px-6 sm:pt-14 lg:px-8">
+          <div className="flex items-end justify-between gap-6 border-b border-paper/10 pb-8">
+            <div>
+              <p className="text-sm tracking-[0.25em] text-oldgold sm:text-base">
+                正殿工程
+              </p>
+              <h2 className="font-display mt-3 text-[clamp(1.5rem,4vw,2.25rem)] text-paper">
+                抬头看梁，一次一座
+              </h2>
+            </div>
+            <p className="hidden max-w-[14rem] text-right text-xs leading-relaxed text-paper/35 sm:block">
+              图在框内，字在一侧——留出殿内该有的空隙。
+            </p>
+          </div>
+        </div>
+
+        <div className="divide-y divide-paper/[0.06]">
+          {featured.map((item, index) => (
+            <HallCase key={item.slug} item={item} index={index} />
+          ))}
+        </div>
+
+        <div className="flex justify-center py-14">
+          <a
+            href="#xiangan"
+            className="text-xs tracking-[0.3em] text-paper/40 hover:text-oldgold"
+          >
+            有相似工程？去香案留下 →
+          </a>
+        </div>
+      </section>
+
+      <Threshold seal="香" title="香案" hint="话说完了，可以留下" />
+
+      {/* 香案 · 联系 */}
+      <section
+        id="xiangan"
+        className="relative scroll-mt-[var(--header-h)] bg-hall pb-6 sm:pb-10"
+      >
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 30%, rgba(139,46,46,0.16), transparent 42%), radial-gradient(ellipse at 50% 20%, rgba(166,139,75,0.08), transparent 36%)",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        <div className="relative mx-auto grid max-w-5xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-12 lg:gap-14 lg:px-8">
+          <div className="lg:col-span-5">
+            <div className="mx-auto h-px w-16 bg-oldgold/40 lg:mx-0" />
+            <div className="mx-auto mt-0 h-12 w-px bg-gradient-to-b from-oldgold/40 to-transparent lg:mx-0" />
+
+            <p className="mt-2 text-sm tracking-[0.3em] text-oldgold">
+              香案
+            </p>
+            <h2 className="font-display mt-4 text-[clamp(1.75rem,5vw,2.75rem)] leading-snug">
+              工程说到这里
+            </h2>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-paper/45">
+              微信优先。类型、地点、大致工期——三句话够我们判断能否承接。
+            </p>
+
+            <div className="mt-8 border border-oldgold/20 bg-hall-deep/60 px-5 py-6">
+              <p className="text-sm tracking-[0.2em] text-paper/45">微信</p>
+              <p className="font-display mt-2 text-2xl text-oldgold sm:text-3xl">
+                {site.wechat}
+              </p>
+              <a
+                href={`tel:${site.phone.replace(/-/g, "")}`}
+                className="mt-3 block text-sm text-paper/50 hover:text-paper"
+              >
+                {site.phone}
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <h3 className="font-display mb-6 text-xl">留下工程需求</h3>
+            <ContactForm />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
     </div>
   );
 }
