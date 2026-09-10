@@ -50,7 +50,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-hall text-paper antialiased">
         <Header />
-        <main className="flex-1 bg-hall pb-[calc(5rem+var(--safe-bottom))] sm:pb-8">{children}</main>
+        <main className="flex-1 bg-hall pb-[calc(6.75rem+var(--safe-bottom))] sm:pb-8">
+          {children}
+        </main>
         <Footer />
         <WeChatFloat />
       </body>

@@ -53,7 +53,7 @@ export function Threshold({ seal, title, hint }: Props) {
         }`}
       />
 
-      <div className="relative text-center">
+      <div className="relative flex w-full max-w-sm flex-col items-center px-4 text-center">
         <p
           className={`font-display text-[clamp(7rem,28vw,16rem)] leading-none text-paper/[0.07] transition-all duration-1000 ${
             active ? "scale-100 opacity-100 tracking-[0.05em]" : "scale-90 opacity-40 tracking-[0.2em]"
@@ -62,8 +62,10 @@ export function Threshold({ seal, title, hint }: Props) {
           {seal}
         </p>
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ${
-            active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          className={`absolute left-1/2 top-1/2 flex w-[min(20rem,92vw)] -translate-x-1/2 flex-col items-center justify-center transition-all duration-700 ${
+            active
+              ? "-translate-y-1/2 opacity-100"
+              : "-translate-y-[40%] opacity-0"
           }`}
         >
           <p className="font-display text-[clamp(2.5rem,10vw,5rem)] text-paper">
@@ -73,8 +75,8 @@ export function Threshold({ seal, title, hint }: Props) {
             {title}
           </p>
           {hint ? (
-            <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-paper/45">
-              {hint}
+            <p className="mt-3 break-keep text-sm leading-relaxed text-paper/45">
+              <span className="whitespace-nowrap">{hint}</span>
             </p>
           ) : null}
         </div>

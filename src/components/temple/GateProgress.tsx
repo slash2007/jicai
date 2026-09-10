@@ -71,7 +71,7 @@ export function GateProgress() {
 
       <nav
         aria-label="进殿动线"
-        className="fixed bottom-[calc(4.25rem+var(--safe-bottom))] left-1/2 z-40 flex -translate-x-1/2 items-center gap-0.5 rounded-full border border-paper/10 bg-hall/80 px-1.5 py-1.5 backdrop-blur-md lg:hidden"
+        className="fixed bottom-[calc(0.75rem+var(--safe-bottom))] left-1/2 z-40 flex -translate-x-1/2 items-center gap-0.5 border border-paper/10 bg-hall/85 px-1.5 py-1.5 backdrop-blur-md lg:hidden"
       >
         {gates.map((gate) => {
           const isActive = active === gate.id;

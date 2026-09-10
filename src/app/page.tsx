@@ -66,11 +66,18 @@ export default function HomePage() {
           </div>
 
           <div className="order-1 flex justify-center lg:order-2">
-            <div className="relative border border-oldgold/25 bg-hall-deep/40 px-5 py-10 backdrop-blur-[2px] sm:px-6 sm:py-14">
+            <div className="relative inline-flex min-w-[5.5rem] flex-col items-center border border-oldgold/25 bg-hall-deep/40 px-7 py-12 backdrop-blur-[2px] sm:min-w-[6.5rem] sm:px-8 sm:py-14">
               <div className="absolute inset-x-3 top-3 h-px bg-oldgold/20" />
               <div className="absolute inset-x-3 bottom-3 h-px bg-oldgold/20" />
-              <h1 className="font-display writing-vertical mx-auto text-[clamp(2.75rem,8vw,4.5rem)] leading-[1.35] tracking-[0.35em] text-paper">
-                {site.name}
+              <h1
+                className="font-display flex flex-col items-center gap-3 text-[clamp(2.15rem,7vw,4.25rem)] leading-none text-paper sm:gap-4"
+                aria-label={site.name}
+              >
+                {Array.from(site.name).map((ch, i) => (
+                  <span key={`${ch}-${i}`} className="block">
+                    {ch}
+                  </span>
+                ))}
               </h1>
               <p className="mt-8 text-center text-sm tracking-[0.3em] text-oldgold/80">
                 门
