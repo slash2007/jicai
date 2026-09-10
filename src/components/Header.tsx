@@ -62,7 +62,7 @@ export function Header() {
           : "border-transparent bg-transparent text-paper"
       }`}
     >
-      <div className="mx-auto flex h-[var(--header-h)] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="relative z-50 mx-auto flex h-[var(--header-h)] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
           href="#shanmen"
           onClick={(e) => {
@@ -129,9 +129,18 @@ export function Header() {
         </button>
       </div>
 
+      {open ? (
+        <button
+          type="button"
+          aria-label="关闭菜单"
+          className="fixed inset-0 z-40 bg-hall/50 md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      ) : null}
+
       <div
         id="mobile-nav"
-        className={`md:hidden ${open ? "block" : "hidden"}`}
+        className={`relative z-50 md:hidden ${open ? "block" : "hidden"}`}
       >
         <nav
           className="border-t border-paper/10 bg-hall px-4 py-6 text-paper"

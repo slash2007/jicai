@@ -3,7 +3,7 @@ import { host, site } from "@/content/site";
 
 /**
  * 山门之后、侧廊之前：主理人以迎客身份出场，
- * 如住持迎入——先见人，再随其入廊、殿、香案。
+ * 如住持迎入——先见人，再随其入廊、殿、结缘。
  */
 export function HostWelcome() {
   return (

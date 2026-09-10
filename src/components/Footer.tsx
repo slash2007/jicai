@@ -2,8 +2,8 @@ import { navItems, site } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-paper/10 bg-hall text-paper">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:px-8 lg:py-14">
+    <footer className="border-t border-paper/10 bg-hall pb-[calc(5.75rem+var(--safe-bottom))] text-paper lg:pb-0">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 pr-20 sm:px-6 sm:pr-6 lg:flex-row lg:items-start lg:justify-between lg:px-8 lg:py-14">
         <div className="w-max max-w-full shrink-0">
           <p className="font-display text-2xl tracking-wider whitespace-nowrap">
             {site.name}
@@ -43,7 +43,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-span-2 sm:col-span-1">
+          <div className="col-span-2 sm:col-span-1 sm:pr-16 lg:pr-0">
             <p className="text-sm tracking-[0.15em] text-oldgold">合作</p>
             <p className="mt-3 text-sm leading-relaxed text-paper/45">
               寺庙、古建工程方与私人宅院均可咨询。请说明工程类型与大致地点。

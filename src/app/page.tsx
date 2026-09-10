@@ -52,7 +52,7 @@ export default function HomePage() {
               {site.tagline}
             </p>
             <p className="mt-3 text-sm leading-relaxed text-paper/35">
-              过山门，先见主理人；再随他入廊看工艺、进殿看工程、到香案谈承接。
+              过山门，先见主理人；再随他入廊看工艺、进殿看工程、到结缘处谈承接。
             </p>
             <a
               href="#zhuchi"
@@ -186,7 +186,7 @@ export default function HomePage() {
             结缘
           </p>
           <h2 className="font-display mt-4 text-center text-[clamp(1.75rem,5vw,2.75rem)] leading-snug">
-            工程说到这里
+            工程在这说
           </h2>
           <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-paper/45">
             微信优先。类型、地点、大致工期——三句话够我们判断能否承接。
