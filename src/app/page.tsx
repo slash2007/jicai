@@ -9,7 +9,7 @@ import { IncenseSpine } from "@/components/temple/IncenseSpine";
 import { LanternField } from "@/components/temple/LanternField";
 import { Threshold } from "@/components/temple/Threshold";
 import { getFeaturedCases } from "@/content/cases";
-import { processSteps, services, site } from "@/content/site";
+import { services, site } from "@/content/site";
 
 export default function HomePage() {
   const featured = getFeaturedCases();
@@ -192,27 +192,7 @@ export default function HomePage() {
             微信优先。类型、地点、大致工期——三句话够我们判断能否承接。
           </p>
 
-          <div className="mt-14 border-t border-paper/10 pt-12">
-            <p className="text-sm tracking-[0.2em] text-oldgold">合作怎么走</p>
-            <h3 className="font-display mt-3 text-xl sm:text-2xl">
-              勘察到验收，四个节点
-            </h3>
-            <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-              {processSteps.map((step) => (
-                <li key={step.step} className="border-t border-oldgold/35 pt-4">
-                  <p className="font-display text-base text-oldgold">
-                    {step.step}
-                  </p>
-                  <p className="mt-2 text-base text-paper">{step.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-paper/40">
-                    {step.desc}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="mt-16 grid gap-12 border-t border-paper/10 pb-6 pt-12 sm:pb-10 lg:grid-cols-12 lg:gap-14">
+          <div className="mt-14 grid gap-12 border-t border-paper/10 pb-6 pt-12 sm:pb-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
               <div className="border border-oldgold/20 bg-hall-deep/60 px-5 py-6">
                 <p className="text-sm tracking-[0.2em] text-paper/45">微信</p>
