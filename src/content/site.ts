@@ -12,6 +12,9 @@ export const site = {
     "吉彩古建工作室承接寺庙、古建筑梁枋彩绘、殿壁壁画、塑像与修缮补绘工程，展示作品案例，欢迎工程方与私人客户咨询合作。",
 } as const;
 
+/** demo / 未正式上线前保持 false，上线收录时改为 true */
+export const allowIndexing = false;
+
 /** 主理人 / 迎客位 — 文案与肖像可随时替换 */
 export const host = {
   /** 左侧竖匾大字 */

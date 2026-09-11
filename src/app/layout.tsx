@@ -3,7 +3,7 @@ import { Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WeChatFloat } from "@/components/WeChatFloat";
-import { site } from "@/content/site";
+import { allowIndexing, site } from "@/content/site";
 import "./globals.css";
 
 const notoSans = Noto_Sans_SC({
@@ -27,6 +27,18 @@ export const metadata: Metadata = {
   },
   description: site.seoDescription,
   metadataBase: new URL("https://jicaigujian.com"),
+  robots: allowIndexing
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: {
+          index: false,
+          follow: false,
+          noimageindex: true,
+        },
+      },
   openGraph: {
     title: site.seoTitle,
     description: site.seoDescription,

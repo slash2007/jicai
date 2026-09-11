@@ -10,47 +10,64 @@ const fieldClass =
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError("");
+    setPending(true);
+
     const form = e.currentTarget;
     const data = new FormData(form);
-    const name = String(data.get("name") || "");
-    const contact = String(data.get("contact") || "");
-    const type = String(data.get("type") || "");
-    const location = String(data.get("location") || "");
-    const message = String(data.get("message") || "");
+    const payload = {
+      name: String(data.get("name") || ""),
+      contact: String(data.get("contact") || ""),
+      type: String(data.get("type") || ""),
+      location: String(data.get("location") || ""),
+      message: String(data.get("message") || ""),
+    };
 
-    const subject = encodeURIComponent(`吉彩古建工程咨询 - ${name || "客户"}`);
-    const body = encodeURIComponent(
-      [
-        `称呼：${name}`,
-        `电话/微信：${contact}`,
-        `工程类型：${type}`,
-        `大致地点：${location}`,
-        `需求说明：${message}`,
-      ].join("\n"),
-    );
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = (await res.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
 
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      if (!res.ok || !result?.ok) {
+        setError(result?.error || "提交失败，请稍后再试。");
+        return;
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setError("网络异常，请稍后再试或直接添加微信。");
+    } finally {
+      setPending(false);
+    }
   }
 
   if (submitted) {
     return (
       <div className="border border-oldgold/25 bg-hall-deep px-5 py-8 text-sm leading-relaxed text-paper/55 sm:px-6">
-        <p className="font-display text-lg text-paper">已打开邮件草稿</p>
+        <p className="font-display text-lg text-paper">已收到，我们尽快回复</p>
         <p className="mt-2">
-          若未自动跳转，也可直接添加微信{" "}
-          <span className="text-oldgold">{site.wechat}</span>，或拨打{" "}
-          <a
-            className="text-oldgold underline-offset-2 hover:underline"
-            href={`tel:${site.phone.replace(/-/g, "")}`}
-          >
-            {site.phone}
-          </a>
-          。
+          也可直接添加微信{" "}
+          <span className="text-oldgold">{site.wechat}</span>
+          ，沟通往往更快。
         </p>
+        <button
+          type="button"
+          className="mt-6 text-sm tracking-wider text-oldgold underline-offset-4 hover:underline"
+          onClick={() => setSubmitted(false)}
+        >
+          再留一条
+        </button>
       </div>
     );
   }
@@ -99,14 +116,20 @@ export function ContactForm() {
           className={`${fieldClass} py-3`}
         />
       </div>
+      {error ? (
+        <p className="text-sm leading-relaxed text-cinnabar" role="alert">
+          {error}
+        </p>
+      ) : null}
       <button
         type="submit"
-        className="flex min-h-12 w-full items-center justify-center bg-cinnabar px-5 text-sm tracking-wider text-paper transition-colors hover:bg-cinnabar-hover sm:w-auto"
+        disabled={pending}
+        className="flex min-h-12 w-full items-center justify-center bg-cinnabar px-5 text-sm tracking-wider text-paper transition-colors hover:bg-cinnabar-hover disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        提交咨询
+        {pending ? "提交中…" : "提交咨询"}
       </button>
       <p className="text-xs leading-relaxed text-paper/35">
-        提交将打开邮件客户端。更快捷的方式是添加微信 {site.wechat}。
+        提交后我们会在飞书收到提醒。更快捷的方式是添加微信 {site.wechat}。
       </p>
     </form>
   );
