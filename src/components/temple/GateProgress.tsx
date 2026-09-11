@@ -12,30 +12,41 @@ const gates = [
 
 type GateId = (typeof gates)[number]["id"];
 
+/**
+ * 不用 intersectionRatio：正殿等长区块在手机上永远盖不满整段，
+ * ratio 到不了 0.2，「殿」就点不亮。改为视口探针判断。
+ */
 export function GateProgress() {
   const [active, setActive] = useState<GateId>(gates[0].id);
 
   useEffect(() => {
-    const nodes = gates
-      .map((g) => document.getElementById(g.id))
-      .filter(Boolean) as HTMLElement[];
+    const sync = () => {
+      const probe = window.innerHeight * 0.32;
+      let current: GateId = gates[0].id;
 
-    if (!nodes.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id) {
-          setActive(visible.target.id as GateId);
+      for (const gate of gates) {
+        const el = document.getElementById(gate.id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= probe) {
+          current = gate.id;
         }
-      },
-      { threshold: [0.2, 0.4, 0.55], rootMargin: "-8% 0px -40% 0px" },
-    );
+      }
 
-    nodes.forEach((n) => observer.observe(n));
-    return () => observer.disconnect();
+      const doc = document.documentElement;
+      if (window.scrollY + window.innerHeight >= doc.scrollHeight - 100) {
+        current = "xiangan";
+      }
+
+      setActive(current);
+    };
+
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    return () => {
+      window.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+    };
   }, []);
 
   return (
