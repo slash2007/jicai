@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { site } from "@/content/site";
+import { showPublicContact, site } from "@/content/site";
 
 const types = ["彩绘", "壁画", "塑像", "修缮", "综合工程", "其他"] as const;
 
@@ -46,7 +46,11 @@ export function ContactForm() {
       setSubmitted(true);
       form.reset();
     } catch {
-      setError("网络异常，请稍后再试或直接添加微信。");
+      setError(
+        showPublicContact
+          ? "网络异常，请稍后再试或直接添加微信。"
+          : "网络异常，请稍后再试。",
+      );
     } finally {
       setPending(false);
     }
@@ -56,11 +60,15 @@ export function ContactForm() {
     return (
       <div className="border border-oldgold/25 bg-hall-deep px-5 py-8 text-sm leading-relaxed text-paper/55 sm:px-6">
         <p className="font-display text-lg text-paper">已收到，我们尽快回复</p>
-        <p className="mt-2">
-          也可直接添加微信{" "}
-          <span className="text-oldgold">{site.wechat}</span>
-          ，沟通往往更快。
-        </p>
+        {showPublicContact ? (
+          <p className="mt-2">
+            也可直接添加微信{" "}
+            <span className="text-oldgold">{site.wechat}</span>
+            ，沟通往往更快。
+          </p>
+        ) : (
+          <p className="mt-2">留下的联系方式我们会用来回复，请留意来电或消息。</p>
+        )}
         <button
           type="button"
           className="mt-6 text-sm tracking-wider text-oldgold underline-offset-4 hover:underline"
@@ -129,7 +137,9 @@ export function ContactForm() {
         {pending ? "提交中…" : "提交咨询"}
       </button>
       <p className="text-xs leading-relaxed text-paper/35">
-        提交后我们会在飞书收到提醒。更快捷的方式是添加微信 {site.wechat}。
+        {showPublicContact
+          ? `提交后我们会在飞书收到提醒。更快捷的方式是添加微信 ${site.wechat}。`
+          : "提交后我们会尽快回复，请准确填写方便联系的方式。"}
       </p>
     </form>
   );

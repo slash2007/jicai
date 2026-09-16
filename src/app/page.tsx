@@ -9,7 +9,7 @@ import { IncenseSpine } from "@/components/temple/IncenseSpine";
 import { LanternField } from "@/components/temple/LanternField";
 import { Threshold } from "@/components/temple/Threshold";
 import { getFeaturedCases } from "@/content/cases";
-import { services, site } from "@/content/site";
+import { showPublicContact, services, site } from "@/content/site";
 
 export default function HomePage() {
   const featured = getFeaturedCases();
@@ -189,26 +189,34 @@ export default function HomePage() {
             工程在这说
           </h2>
           <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-paper/45">
-            微信优先。类型、地点、大致工期——三句话够我们判断能否承接。
+            {showPublicContact
+              ? "微信优先。类型、地点、大致工期——三句话够我们判断能否承接。"
+              : "留下类型、地点与大致工期，我们判断能否承接后再与您联系。"}
           </p>
 
-          <div className="mt-14 grid gap-12 border-t border-paper/10 pb-6 pt-12 sm:pb-10 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-5">
-              <div className="border border-oldgold/20 bg-hall-deep/60 px-5 py-6">
-                <p className="text-sm tracking-[0.2em] text-paper/45">微信</p>
-                <p className="font-display mt-2 text-2xl text-oldgold sm:text-3xl">
-                  {site.wechat}
-                </p>
-                <a
-                  href={`tel:${site.phone.replace(/-/g, "")}`}
-                  className="mt-3 block text-sm text-paper/50 hover:text-paper"
-                >
-                  {site.phone}
-                </a>
+          <div
+            className={`mt-14 grid gap-12 border-t border-paper/10 pb-6 pt-12 sm:pb-10 ${
+              showPublicContact ? "lg:grid-cols-12 lg:gap-14" : ""
+            }`}
+          >
+            {showPublicContact ? (
+              <div className="lg:col-span-5">
+                <div className="border border-oldgold/20 bg-hall-deep/60 px-5 py-6">
+                  <p className="text-sm tracking-[0.2em] text-paper/45">微信</p>
+                  <p className="font-display mt-2 text-2xl text-oldgold sm:text-3xl">
+                    {site.wechat}
+                  </p>
+                  <a
+                    href={`tel:${site.phone.replace(/-/g, "")}`}
+                    className="mt-3 block text-sm text-paper/50 hover:text-paper"
+                  >
+                    {site.phone}
+                  </a>
+                </div>
               </div>
-            </div>
+            ) : null}
 
-            <div className="lg:col-span-7">
+            <div className={showPublicContact ? "lg:col-span-7" : "mx-auto w-full max-w-xl"}>
               <h3 className="font-display mb-6 text-xl">留下工程需求</h3>
               <ContactForm />
             </div>

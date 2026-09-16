@@ -1,4 +1,4 @@
-import { navItems, site } from "@/content/site";
+import { navItems, showPublicContact, site } from "@/content/site";
 
 export function Footer() {
   return (
@@ -16,7 +16,11 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        <div
+          className={`grid gap-8 ${
+            showPublicContact ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"
+          }`}
+        >
           <div>
             <p className="text-sm tracking-[0.15em] text-oldgold">导航</p>
             <ul className="mt-3 space-y-2 text-sm text-paper/60">
@@ -29,21 +33,27 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div>
-            <p className="text-sm tracking-[0.15em] text-oldgold">联系</p>
-            <ul className="mt-3 space-y-2 text-sm text-paper/60">
-              <li>微信 {site.wechat}</li>
-              <li>
-                <a
-                  href={`tel:${site.phone.replace(/-/g, "")}`}
-                  className="hover:text-paper"
-                >
-                  {site.phone}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-2 sm:col-span-1 sm:pr-16 lg:pr-0">
+          {showPublicContact ? (
+            <div>
+              <p className="text-sm tracking-[0.15em] text-oldgold">联系</p>
+              <ul className="mt-3 space-y-2 text-sm text-paper/60">
+                <li>微信 {site.wechat}</li>
+                <li>
+                  <a
+                    href={`tel:${site.phone.replace(/-/g, "")}`}
+                    className="hover:text-paper"
+                  >
+                    {site.phone}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          ) : null}
+          <div
+            className={`${
+              showPublicContact ? "col-span-2 sm:col-span-1" : "col-span-1"
+            } sm:pr-16 lg:pr-0`}
+          >
             <p className="text-sm tracking-[0.15em] text-oldgold">合作</p>
             <p className="mt-3 text-sm leading-relaxed text-paper/45">
               寺庙、古建工程方与私人宅院均可咨询。请说明工程类型与大致地点。

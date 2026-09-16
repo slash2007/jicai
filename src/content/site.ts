@@ -3,10 +3,10 @@ export const site = {
   tagline: "彩绘 · 壁画 · 塑像",
   support:
     "从现场勘察到落成，按传统工艺承接寺庙殿宇彩绘、壁画、古建修缮与塑像工程。",
-  phone: "138-0000-0000",
-  wechat: "jicaigujian",
+  phone: "",
+  wechat: "",
   region: "中国 · 山西",
-  email: "hello@jicaigujian.com",
+  email: "",
   seoTitle: "吉彩古建｜寺庙古建彩绘 · 壁画 · 塑像",
   seoDescription:
     "吉彩古建工作室承接寺庙、古建筑梁枋彩绘、殿壁壁画、塑像与修缮补绘工程，展示作品案例，欢迎工程方与私人客户咨询合作。",
@@ -14,6 +14,9 @@ export const site = {
 
 /** demo / 未正式上线前保持 false，上线收录时改为 true */
 export const allowIndexing = false;
+
+/** 是否在页面展示对外微信、电话（数据仍保留在 site.phone / site.wechat） */
+export const showPublicContact = false;
 
 /** 主理人 / 迎客位 — 文案与肖像可随时替换 */
 export const host = {
